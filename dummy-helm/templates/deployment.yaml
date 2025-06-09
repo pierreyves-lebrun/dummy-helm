@@ -42,6 +42,12 @@ spec:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
+          env:
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.httpEcho.apiKey.secretName }}
+                  key: {{ .Values.httpEcho.apiKey.secretKey }}
           livenessProbe:
             httpGet:
               path: /

@@ -5,10 +5,16 @@
 httpEcho:
   replicaCount: 1
   strategy: {}
-  
   pdb:
     minAvailable: 1
     # maxUnavailable: 1  # Either use minAvailable or maxUnavailable, not both
+
+  # API Key configuration
+  apiKey:
+    # Name of the Kubernetes secret containing the API key
+    secretName: "dummy-helm"
+    # Key in the secret that contains the API key value
+    secretKey: "api-key"
 
   image:
     repository: hashicorp/http-echo
