@@ -1,0 +1,16 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "dummy-helm.fullname" . }}
+  labels:
+    {{- include "dummy-helm.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "dummy-helm.selectorLabels" . | nindent 6 }}
+  {{- if .Values.httpEcho.pdb.minAvailable }}
+  minAvailable: {{ .Values.httpEcho.pdb.minAvailable }}
+  {{- end }}
+  {{- if .Values.httpEcho.pdb.maxUnavailable }}
+  maxUnavailable: {{ .Values.httpEcho.pdb.maxUnavailable }}
+  {{- end }} 
